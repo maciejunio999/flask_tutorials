@@ -1,0 +1,27 @@
+<!--
+    show people and their tasks
+-->
+
+<div class="person-card" data-person-id="{{ person.id }}">
+
+    {% include "_person_control.html" %}
+
+    <div class="person-content">
+        <h2>
+            <span data-person-fname="{{ person.fname }}">{{ person.fname }}</span>
+            <span data-person-lname="{{ person.lname }}">{{ person.lname }}</span>
+        </h2>
+    </div>
+
+    <ul class="task-list">
+
+        <li class="task-create-card">
+            {% include "_task_create_form.html" %}
+        </li>
+
+        {% for task in person.tasks %}
+            {% include "_task_content.html" %}
+        {% endfor %}
+        
+    </ul>
+</div>

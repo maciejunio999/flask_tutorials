@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="name">
+    <h1 style="text-align: center">Task Editor</h1>
+
+    <div class="form">
+        <form action="/update/{{task.id}}" method="POST">
+            <label for="name">Tasks name:</label>
+            <input type="text" name="name" id="name" value="{{task.name}}">
+            <br>
+            <label for="description" style="text-align: top;">Description:</label>
+            <textarea id="description" name="description" rows="5" cols="40" class="description_style">{{task.description}}</textarea>
+            <br>
+            <label for="due_date" style="text-align: top;">Due date:</label>
+            <input type="date" id="due_date" name="due_date" value="{{task.due_date}}" class="d_date">
+            <br>
+            <input type="submit" value="Edit Task" class="button">
+        </form>
+
+        {% if show_hidden %}
+            <p>Your task has to have a name</p>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <h1>Dashboard</h1>
+    <a href="{{ url_for('logout') }}">Press here to log out</a>
+    <br>
+    <a href="{{ url_for('home') }}">Home</a>
+    <br>
+
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.nickname }}
+        {{ form.submit }}
+        {% if form.errors %}
+            {{ form.errors }}
+        {% endif %}
+    </form>
+
+    {% if nickname|length > 0 %}
+        <p>Your nickname:</p>
+        <p>{{ nickname }}</p>
+    {% endif %}
+
+</body>
+
+</html>

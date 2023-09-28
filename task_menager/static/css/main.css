@@ -1,0 +1,68 @@
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #FFFFFF;
+}
+
+.name {
+    margin: 0 auto;
+    width: 400px;
+}
+
+table, td, th {
+    border: 1px solid #5d1c75;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#name {
+    width: 70%;
+}
+
+.name_style {
+    width: 300px;
+    height: 15px;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.description_style {
+    margin-top: 7px;
+    margin-left: 11px;
+    font-family: sans-serif;
+}
+
+.d_date {
+    margin-top: 7px;
+    margin-left: 26px;
+    font-family: sans-serif;
+}
+
+.button {
+    background-color: #8907B8;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 7px 295px;
+    cursor: pointer;
+  }

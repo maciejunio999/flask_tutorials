@@ -1,0 +1,17 @@
+<!-- form to create new tasks -->
+
+<form>
+    <input name="person_id" type="hidden" value="{{ person.id }}" />
+
+    <label>
+        <span>Task</span>
+        <input name="name" type="text" value="" />
+    </label>
+
+    <label>
+        <span>Due date</span>
+        <input name="date" type="date" value="" />
+    </label>
+
+    <button data-action="create">✨ Create Task</button>
+</form>

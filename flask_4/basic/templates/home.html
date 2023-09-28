@@ -1,0 +1,47 @@
+<!--
+    Contains your front-end markup
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Flask REST API</title>
+
+    <!-- creating the full URL to choosen css styles under the hood -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/people.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notes.css') }}">
+    
+    <!--  load external JavaScript files, you use the <script> tag
+        inside it, you reference index.js with a Flask  template tag, just like you did for the CSS file
+        that way, you dynamically create the full URL to index.js -->
+    <script
+        src="{{ url_for('static', filename='js/index.js') }}"
+        type="module"
+    ></script>
+
+</head>
+
+<body>
+    <h1>
+        Hello, People!
+    </h1>
+    <!-- Replace person in people for loop with this content -->
+    <div class="person-create-card">
+        {% include "_person_create_form.html" %}
+    </div>
+    <div class="people-list">
+        {% for person in people %}
+             {% include "_person_content.html" %}
+        {% endfor %}
+    </div>
+
+    {% if config['DEBUG'] %}
+        {% include "_debug.html" %}
+    {% endif %}
+</body>
+
+</html>
