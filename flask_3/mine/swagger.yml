@@ -1,0 +1,259 @@
+openapi: 3.0.0
+info:
+  title: "Flask REST API"
+  description: "An API about people, tasks and tasks"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    Person:
+      type: "object"
+      required:
+        - lname
+      properties:
+        fname:
+          type: "string"
+        lname:
+          type: "string"
+    Task:
+      type: "object"
+      required:
+        - person_id
+        - name
+      properties:
+        name:
+          type: "string"
+        person_id:
+          type: "integer"
+    Comment:
+      type: "object"
+      required:
+        - task_id
+        - content
+      properties:
+        content:
+          type: "string"
+        task_id:
+          type: "integer"
+  parameters:
+    lname:
+      name: "lname"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    task_id:
+      name: "task_id"
+      description: "ID of the task"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+    tasks_id:
+      name: "tasks_id"
+      description: "ID of the tasks"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+    comment_id:
+      name: "comment_id"
+      description: "ID of the comment"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+
+paths:
+  /people:
+    get:
+      operationId: "people.read_all"
+      tags:
+        - "People"
+      summary: "Read the list of people"
+      responses:
+        "200":
+          description: "Successfully read people list"
+    post:
+      operationId: "people.create"
+      tags:
+        - People
+      summary: "Create a person"
+      requestBody:
+          description: "Person to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "person"
+                $ref: "#/components/schemas/Person"
+      responses:
+        "201":
+          description: "Successfully created person"
+  /people/{lname}:
+    get:
+      operationId: "people.read_one"
+      tags:
+        - People
+      summary: "Read one person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully read person"
+    put:
+      tags:
+        - People
+      operationId: "people.update"
+      summary: "Update a person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully updated person"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "person"
+              $ref: "#/components/schemas/Person"
+    delete:
+      tags:
+        - People
+      operationId: "people.delete"
+      summary: "Delete a person"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "204":
+          description: "Successfully deleted person"
+
+  /tasks:
+    post:
+      operationId: "tasks.create"
+      tags:
+        - Tasks
+      summary: "Create a task associated with a person"
+      requestBody:
+          description: "Task to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "task"
+                type: "object"
+                properties:
+                  person_id:
+                    type: "integer"
+                  name:
+                    type: "string"
+      responses:
+        "201":
+          description: "Successfully created a task"
+  /tasks/{task_id}:
+    get:
+      operationId: "tasks.read_one"
+      tags:
+        - Tasks
+      summary: "Read one task"
+      parameters:
+        - $ref: "#/components/parameters/task_id"
+      responses:
+        "200":
+          description: "Successfully read one task"
+    put:
+      tags:
+        - Tasks
+      operationId: "tasks.update"
+      summary: "Update a task"
+      parameters:
+        - $ref: "#/components/parameters/task_id"
+      responses:
+        "200":
+          description: "Successfully updated task"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "task"
+              type: "object"
+              properties:
+                name:
+                  type: "string"
+    delete:
+      tags:
+        - Tasks
+      operationId: "tasks.delete"
+      summary: "Delete a task"
+      parameters:
+        - $ref: "#/components/parameters/task_id"
+      responses:
+        "204":
+          description: "Successfully deleted task"
+
+  /comments:
+    post:
+      operationId: "comments.create"
+      tags:
+        - Comments
+      summary: "Create a comment associated with a task"
+      requestBody:
+          description: "Comment task"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "comment"
+                type: "object"
+                properties:
+                  task_id:
+                    type: "integer"
+                  content:
+                    type: "string"
+      responses:
+        "201":
+          description: "Successfully created a comment"
+  /comments/{comment_id}:
+    get:
+      operationId: "comments.read_one"
+      tags:
+        - Comments
+      summary: "Read one comment"
+      parameters:
+        - $ref: "#/components/parameters/comment_id"
+      responses:
+        "200":
+          description: "Successfully read one comment"
+    put:
+      tags:
+        - Comments
+      operationId: "comments.update"
+      summary: "Update a comment"
+      parameters:
+        - $ref: "#/components/parameters/comment_id"
+      responses:
+        "200":
+          description: "Successfully updated comment"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "comment"
+              type: "object"
+              properties:
+                content:
+                  type: "string"
+    delete:
+      tags:
+        - Comments
+      operationId: "comments.delete"
+      summary: "Delete a comment"
+      parameters:
+        - $ref: "#/components/parameters/comment_id"
+      responses:
+        "204":
+          description: "Successfully deleted comment"
